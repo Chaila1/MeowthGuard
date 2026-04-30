@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  cardName: MyString
+  prediction: MyString
+  confidenceScore: 1.5
+  reasoning: MyText
+
+two:
+  user: two
+  cardName: MyString
+  prediction: MyString
+  confidenceScore: 1.5
+  reasoning: MyText
