@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   post '/login', to: 'log#login'
 
-  resources :users, only: [:create]
+  resources :users, only: [:create], controller: 'user'
+
+  resources :poke_scans, only: [:index, :destroy], controller: 'poke_scanner'
 
 end

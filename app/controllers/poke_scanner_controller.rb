@@ -1,13 +1,23 @@
 class PokeScannerController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    scans = current_user.poke_scans.order(created_at: :desc)
+    render json: scans
+  end
+
+  def destroy
+    scan = current_user.poke_scans.find(params[:id])
+    scan.destroy
+    render json: {message: 'This card scan has been deleted'}
+  end
 
   def create 
     unless params[:image].present?
       return render json: { error: "No image was recieved" }, status: :bad_request
     end
 
-    user = User.first
-
-    poke_scan = user.poke_scans.create!(
+    poke_scan = current_user.poke_scans.create!(
       cardName: "Scanning...",
       prediction: "Pending", 
       confidenceScore: 0.0

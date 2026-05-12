@@ -1,6 +1,6 @@
-class UsersController < ApplicationController
+class UserController < ApplicationController
   def create
-    user = User.new(user_params)
+    user = User.new(userParams)
     if user.save
       render json: { status: 'created'}, status: :created
     else
