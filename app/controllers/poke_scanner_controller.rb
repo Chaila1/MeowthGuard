@@ -1,8 +1,11 @@
 class PokeScannerController < ApplicationController
+  include Rails.application.routes.url_helpers
   before_action :authenticate_user!
 
   def index
-    scans = current_user.poke_scans.order(created_at: :desc)
+    scans = current_user.poke_scans.order(created_at: :desc).map do |scan|
+      scan.as_json.merge(image_url: scan.image.attached? ? rails_blob_path(scan.image, only_path: true) : nil)
+    end
     render json: scans
   end
 
